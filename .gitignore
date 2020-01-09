@@ -1,3 +1,9 @@
+# 3DS Generated files
+build/
+*.3dsx
+*.elf
+*.smdh
+
 # Visual Studio
 .vs**/
 Debug/

@@ -4,7 +4,7 @@ int main() {
     m3d::Applet app;
 
     while (app.isRunning()) {
-        if (m3d::buttons::buttonPressed(m3d::button::Start)) {
+        if (m3d::buttons::buttonPressed(m3d::buttons::Start)) {
             app.exit();
         }
     }

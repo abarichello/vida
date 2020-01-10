@@ -4,6 +4,9 @@ build/
 *.elf
 *.smdh
 
+Makefile
+*.make
+
 # Visual Studio
 .vs**/
 Debug/

@@ -48,8 +48,6 @@ project "vida"
         "-MP",
         "-g",
         "-Wall",
-        "-std=gnu++11",
-        "-Werror",
         "-mword-relocations",
         "-ffunction-sections",
         "-fno-rtti",

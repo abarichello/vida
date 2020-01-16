@@ -27,6 +27,7 @@ project "vida"
     includedirs {
         "include",
         "include/m3d",
+        "src",
         devkitpro .. "/libctru/include",
         devkitpro .. "/portlibs/3ds/include",
     }

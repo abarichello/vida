@@ -14,20 +14,24 @@ void Game::startup() {
 }
 
 void Game::run() {
+    m3d::Clock clock;
+
     while (app.isRunning()) {
-        update();
+        float delta = clock.getTime().getAsSeconds();
+        clock.reset();
+        update(delta);
         draw();
     }
 }
 
-void Game::update() {
+void Game::update(float delta) {
     if (m3d::buttons::buttonPressed(m3d::buttons::Start)) {
         app.exit();
     }
 
     // --- Debug ---
     if (m3d::buttons::buttonPressed(m3d::buttons::A)) {
-        printf("%d\n", app.getCurrentFrame());
+        std::cout << app.getCurrentFrame() << "\n";
     }
 #ifdef DEBUG
     console.setDebugConsole();

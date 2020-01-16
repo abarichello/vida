@@ -12,7 +12,7 @@ public:
 
     void startup();
     void run();
-    void update();
+    void update(float delta);
     void draw();
 
     m3d::Applet app;

@@ -1,7 +1,7 @@
 #include "game/board.h"
 
-Board::Board(m3d::Vector2f size)
-    : cube(3, 3, 3), size(size), testRect(0, 0, 1000, 1000, m3d::Color(255, 255, 255)) {
+Board::Board(m3d::Vector2f size) : size(size), testCell(cellDimensions) {
+    testCell.body.setPosition(startPos);
 }
 
 void Board::update(m3d::Camera& camera, float delta) {
@@ -27,6 +27,5 @@ void Board::update(m3d::Camera& camera, float delta) {
 }
 
 void Board::draw(m3d::Screen& screen) {
-    screen.drawTop(testRect, m3d::RenderContext::Mode::Spatial);
-    screen.drawTop(cube, m3d::RenderContext::Mode::Spatial);
+    screen.drawTop(testCell.body, m3d::RenderContext::Mode::Spatial);
 }

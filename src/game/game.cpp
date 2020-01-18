@@ -1,6 +1,6 @@
 #include "game/game.h"
 
-Game::Game() {
+Game::Game() : board() {
     startup();
 }
 
@@ -9,16 +9,23 @@ void Game::startup() {
     text.setPosition(topRes.u / 2, topRes.v / 4);
 
     std::cout << "Start game\n";
-    std::printf("2DS: %d\nBattery Level: %d", app.is2ds(), app.getBatteryLevel());
+    std::cout << "2DS: " << app.is2ds() << "\nBattery level: " << app.getBatteryLevel() << "\n";
     std::cout << topRes.u << " " << topRes.v << "\n";
+
+#ifdef DEBUG
+    console.setDebugConsole();
+#endif
 }
 
 void Game::run() {
     m3d::Clock clock;
+    clock.start();
 
     while (app.isRunning()) {
         float delta = clock.getTime().getAsSeconds();
         clock.reset();
+        std::cout << "delta: " << delta << "\n";
+        clock.start();
         update(delta);
         draw();
     }
@@ -29,12 +36,9 @@ void Game::update(float delta) {
         app.exit();
     }
 
-    // --- Debug ---
-    if (m3d::buttons::buttonPressed(m3d::buttons::A)) {
-        std::cout << app.getCurrentFrame() << "\n";
-    }
+    auto& camera = screen.getCamera(m3d::RenderContext::ScreenTarget::Top);
+    board.update(camera, delta);
 #ifdef DEBUG
-    console.setDebugConsole();
     if (m3d::buttons::buttonDown(m3d::buttons::Select) && m3d::buttons::buttonPressed(m3d::buttons::A)) {
         console.toggleConsole();
     }
@@ -42,6 +46,8 @@ void Game::update(float delta) {
 }
 
 void Game::draw() {
+    board.draw(screen);
+
     screen.drawTop(text);
     screen.render();
 }

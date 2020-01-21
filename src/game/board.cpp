@@ -1,6 +1,6 @@
 #include "game/board.h"
 
-Board::Board(m3d::Vector2f size) : size(size), testCell(cellDimensions) {
+Board::Board() : testCell(cellDimensions) {
     testCell.body.setPosition(startPos);
 }
 
@@ -23,7 +23,8 @@ void Board::update(m3d::Camera& camera, float delta) {
     if (m3d::buttons::buttonDown(m3d::buttons::Button::R)) {
         camera.moveZ(moveRate * delta);
     }
-    std::printf("Camera X %f | Y %f | Z %f\n", camera.getPositionX(), camera.getPositionY(), camera.getPositionZ());
+    printf("Camera X:%d | Y:%d | Z:%d \n", (int)camera.getPositionX(), (int)camera.getPositionY(),
+           (int)camera.getPositionZ());
 }
 
 void Board::draw(m3d::Screen& screen) {

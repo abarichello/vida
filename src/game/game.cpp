@@ -24,7 +24,6 @@ void Game::run() {
     while (app.isRunning()) {
         float delta = clock.getTime().getAsSeconds();
         clock.reset();
-        std::cout << "delta: " << delta << "\n";
         clock.start();
         update(delta);
         draw();

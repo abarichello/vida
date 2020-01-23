@@ -3,9 +3,7 @@ build/
 *.3dsx
 *.elf
 *.smdh
-
-Makefile
-*.make
+vida.make
 
 # Visual Studio
 .vs**/

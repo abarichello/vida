@@ -1,3 +1,6 @@
+-- For some reason this premake only generates 3dsx files compatible with emulators and not with
+-- real 3DS hardware. Apparently no one knows how to compile homebrew manually.
+
 workspace "vida"
     configurations { "Debug", "Release" }
 
@@ -11,7 +14,7 @@ project "vida"
 
     makesettings [[
         CXX = arm-none-eabi-g++
-        LD = arm-none-eabi-g++
+        LD = arm-none-eabi-ld
     ]]
 
     files {
@@ -45,10 +48,9 @@ project "vida"
     }
 
     buildoptions {
-        "-MMD",
-        "-MP",
         "-g",
         "-Wall",
+        "-std=gnu++11",
         "-mword-relocations",
         "-ffunction-sections",
         "-fno-rtti",
@@ -67,6 +69,7 @@ project "vida"
         "-mtune=mpcore",
         "-mfloat-abi=hard",
         "-mtp=soft",
+        "-Wl,-Map,8.map",
     }
 
     filter "configurations:Debug"

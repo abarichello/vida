@@ -1,6 +1,6 @@
 #include "game/game.h"
 
-Game::Game() : board() {
+Game::Game() : board(m3d::Vector2f{8, 8}) {
     startup();
 }
 

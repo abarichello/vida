@@ -4,12 +4,15 @@
 
 namespace Cells {
     enum class State { Dead, Alive };
+    const m3d::Vector3f cellDimensions{0, 3, 3};
 
     struct Cell {
-        Cell(m3d::Vector3f dimensions);
-        Cells::State state = Cells::State::Dead;
+        Cell();
+
+        void flip();
+
+        Cells::State state;
         m3d::Cuboid body;
     };
 
-    void flip(Cell& cell);
 }  // namespace Cells

@@ -1,14 +1,12 @@
 #include "game/game.h"
 
-Game::Game() : board(m3d::Vector2f{8, 8}) {
+Game::Game() : board(m3d::Vector2f{16, 16}) {
     startup();
 }
 
 void Game::startup() {
     auto topRes = Util::getScreenResolution(m3d::RenderContext::ScreenTarget::Top);
-    text.setPosition(topRes.u / 2, topRes.v / 4);
-
-    std::cout << "Start game\n";
+    std::cout << "Game start\n";
     std::cout << "2DS: " << app.is2ds() << "\nBattery level: " << app.getBatteryLevel() << "\n";
     std::cout << topRes.u << " " << topRes.v << "\n";
 
@@ -37,7 +35,9 @@ void Game::update(float delta) {
 
     auto& camera = screen.getCamera(m3d::RenderContext::ScreenTarget::Top);
     board.update(camera, delta);
+
 #ifdef DEBUG
+    fps.update(delta);
     if (m3d::buttons::buttonDown(m3d::buttons::Select) && m3d::buttons::buttonPressed(m3d::buttons::A)) {
         console.toggleConsole();
     }
@@ -46,7 +46,5 @@ void Game::update(float delta) {
 
 void Game::draw() {
     board.draw(screen);
-
-    screen.drawTop(text);
     screen.render();
 }

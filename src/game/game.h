@@ -21,10 +21,9 @@ public:
 
     Board board;
 
-    m3d::Text text = m3d::Text("VIDA");
-
 private:
 #ifdef DEBUG
     Console console;
+    FPS fps;
 #endif
 };

@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "game/cell.h"
+#include "gui/fps.h"
 
 class Board {
 public:
@@ -16,7 +17,7 @@ public:
 
     Cells::Cell testCell;
 
-    float moveRate = 10.f;
+    float moveRate = 17.f;
 
 private:
     m3d::Vector2f boardSize;

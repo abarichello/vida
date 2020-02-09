@@ -16,6 +16,7 @@ public:
     void draw(m3d::Screen& screen);
 
     Cells::Cell testCell;
+    m3d::Texture cubeTexture;
 
     float moveRate = 17.f;
 

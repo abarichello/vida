@@ -4,15 +4,24 @@
 Board::Board(m3d::Vector2f boardSize)
     : testCell(), boardSize(boardSize), startPos(m3d::Vector3f{0, 0, 0}), cells(boardSize.u * boardSize.v) {
     setup();
-    testCell.body.setPosition(startPos);
 }
 
 void Board::setup() {
+    if (!cubeTexture.loadFromFile("romfs:/resources/texures/texture.png")) {
+        std::cout << "Error loading cube texture file\n";
+    }
+    testCell.body.bindTexture(cubeTexture);
     for (int i = 0; i < boardSize.u; ++i) {
         for (int j = 0; j < boardSize.v; ++j) {
             float x = i * Cells::cellDimensions.y;
             float y = j * Cells::cellDimensions.z;
-            cells.at(i * boardSize.v + j).body.setPosition(m3d::Vector3f{x, y, 0});
+
+            int vectorIndex = i * boardSize.v + j;
+            auto& cell = cells.at(vectorIndex);
+            cell.body.setPosition(m3d::Vector3f{x, y, 0});
+            if ((i * j + 1) % 2 == 0) {
+                cell.state = Cells::State::Alive;
+            }
         }
     }
 }
@@ -40,6 +49,12 @@ void Board::update(m3d::Camera& camera, float delta) {
 
 void Board::draw(m3d::Screen& screen) {
     for (unsigned int i = 0; i < cells.size(); ++i) {
+        if (cells[i].state == Cells::State::Dead) {
+            cells[i].body.bindTexture(cubeTexture);
+        } else {
+            cells[i].body.unbindTexture();
+        }
         screen.drawTop(cells[i].body, m3d::RenderContext::Mode::Spatial);
     }
+    screen.drawTop(testCell.body, m3d::RenderContext::Mode::Spatial);
 }
